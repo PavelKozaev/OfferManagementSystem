@@ -1,0 +1,40 @@
+<div class="list-container">
+  <div class="list-header">
+    <h3>Всего найдено: {{ totalCount() }}</h3>
+  </div>
+  
+  <div *ngIf="isLoading()">
+    <p>Загрузка...</p>
+  </div>
+
+  <div *ngIf="error()">
+    <p class="error-message">{{ error() }}</p>
+  </div>
+
+  <div *ngIf="!isLoading() && !error()">
+    <table *ngIf="offers().length > 0; else noOffers">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Марка</th>
+          <th>Модель</th>
+          <th>Поставщик</th>
+          <th>Дата регистрации</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let offer of offers()">
+          <td>{{ offer.id }}</td>
+          <td>{{ offer.brand }}</td>
+          <td>{{ offer.model }}</td>
+          <td>{{ offer.supplierName }}</td>
+          <td>{{ offer.registeredAt | date:'dd.MM.yyyy HH:mm' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noOffers>
+      <p>Офферы не найдены.</p>
+    </ng-template>
+  </div>
+</div>

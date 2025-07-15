@@ -1,0 +1,17 @@
+<div *ngIf="isLoading">
+  <p>Загрузка данных...</p>
+</div>
+<div *ngIf="error">
+  <p class="error-message">{{ error }}</p>
+</div>
+<div *ngIf="!isLoading && !error">  
+  <ul *ngIf="suppliers.length > 0; else noData">
+    <li *ngFor="let supplier of suppliers">
+      <span class="supplier-name">{{ supplier.name }}</span>
+      <span class="offer-count">({{ supplier.offersCount }} офферов)</span>
+    </li>
+  </ul>
+  <ng-template #noData>
+    <p>Данные о популярных поставщиках отсутствуют.</p>
+  </ng-template>
+</div>
