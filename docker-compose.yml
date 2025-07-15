@@ -24,5 +24,15 @@ services:
     depends_on:
       - db 
       
+  client:
+    container_name: offer-management-client
+    build:
+      context: ./frontend  
+      dockerfile: Dockerfile 
+    ports:
+      - "81:80"
+    depends_on:
+      - api
+
 volumes:
   mssql-data:
